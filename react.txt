@@ -1,0 +1,433 @@
+1.why we need a java script framework.?( take example of airbnd data, ui messup ui-data sync up)
+2.what is diffrent between vanila java script and the framework implimentation?(data an UI sync) 
+3.what is react and react-dom library .?( react is extremly powerful, decelerative, component based, state-driven javaScript Library for building complex userInterfaces. it's buildby facebook).
+4.what is destructuring? (taking some information out from object and arry called destructuring.)
+5. falsy values: 0,'',null,undefined
+6 what is short circuiting?( &&,||,??)
+7.null collashi operater and or operater diffrence.( ?? only treat null, undefined as a false values)
+8.optional chaining?( ?. operater used on object for opetional chaining)
+9. How React render components in dom.? ( using react-dom)
+10.What is strict mode in react.? It's nothing but in strictmode is component of react, inside it we render our app component. during development in strictMode react-dom render our app twice in order to find certain bugs also react check we are using outdated part of react API. strictmode is not a downbreaking but it still a good idea to render our app in to strict mode.
+11. what is component?(components are the basic building block for building UI. component have the information like data, logic and how to ui looklike(Apperance) inside it
+  A comonent is abstraction that encapsulate the ui and logic, while the props is a public API for the component by using prop the creaters allow  consumer's to intrect with the component. 
+12. what is jsx? jsx is declerative syntax of writing how to component look like. 
+13. React have sepration of components not sepration of technology.
+14. what is props.? props are used to pass the information from parent to child component.
+15. what is a side effect?: side effect creats when we are changing data which is located outside the component. props is located from perent so it can't be modified. react is based on all pure function/ pure component which don't create any side effect.
+16. props are is immutableor mutable. immutable.
+17.how to render a list in react?
+18.what is a conditional rendering?(&&,?:,using multiple return statement with if statement)
+19.In jsx can we writte if else statement ? no
+19.what is react Fragment? (React render a single element, but we don't want create new dom node so we use react fragment which is not create any new dom Node)
+20. why Event handlers should have a function value instead of function call?(function call will be immedietly called by react when the page loads)
+21.what is state?(Data that a component can hold over time,necessary for information that it needs to remember throughout the app’s lifecycle)
+22.what is controlled element? (html form elements have managed their stats by self, We have to force them to handle their state by react when the react handle the element stats it called the controlled component, keep sync the form elemets stats with our component state)
+23.stats vs props diffrence?
+24.what is lifting state up?(when one or more sibling component need a state to access. so we would place it to the first common parent component)
+25. stats are mutable or immoutable?
+26. how to do add, delete, update items in React List? (add using spread operater, delete using filter function, update using spread operaterin map function)
+27. what is derived state? (the derived state is the state which is computed from an excisting props or stats.)
+28.what is children props?(Its a special property of props, which value is passed to the children component betweem open and closing tags of children components used for generic component)
+29.type of component? stateless, statefull,structure component
+30.what is component composition? (combining diffrent component using children props,it create highly reusable and flexibe component, fix problem of props drilling(ultimattely we are passing a component2 in to another componen1 as a children prop to reuse that child component1).
+31.what is element prop? (element prop is alternative of children prop, pass the component to another component using element atribute value on component)
+34.how to set default props? default values to the properties of prop by using destructuring and = operater:-- {color=#ffff, size='25rem, maxRating =5}
+35.how to set hover effect on jsx element? hover effect handledby onMouseEnter or onMouseLeave events)
+36.how to check prop types( So  with propTypes, we can specify the type of value that we except the consumer of the component pass in each of the props. W call it type checking) PropTypes is a package in React.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.component. is a peice of code in order to describe UI. It a simple javaScript function it return React Element
+2.what is component Instance.(So we can say that an instance is like the actual physical manifestation of a component living in our componen tree.)
+3.can we call a component as function call() with out JSX? yes we can but we don't this because now the react sees this component call as a simple written element not a component intance now this can't manage his own state, it violet the react hooks rules.(Nevet ever do this))
+4.How react works? basically react component returns a jsx so each jsx element produce create.reat elememt function call to create React element then these elements are now create in to dom elements( see the PPT of course
+5.React default behavior is when the component is removed from the tree the state is also removed from the memory.
+6.what is a key prop? its a special prop which tells the diffing algorithm that this component/ element is unique.//It allow React to distinguish between instances of same component Type.
+7what is side Effect?(So, a side effect happens whenever a function depends on any data that is outside the function scope, or even more importantly whenever a function modifies data that is outside its scope. examples of side effects are HTTP requests,riding to the DOM, setting timers and more.)
+8.pure Function.?(The other important functional concept is pure functions, which are basically functions without side effects. so basically, these are functions that do not change any variable outside their scope. Also, when we give a pure function the same input, it'll always return the same output.which makes this function predictable.)
+9.what is Render Logic and Event Handler Function?
+10.State updates Batching? 
+  -- state updates are batched, renders are not triggered immediately. which says that there is also batching of multiple setState calls. 
+  -- if there are three state variables being updated in this event handler, then React would re-render three times, right? However, this is actually not how it works. So this is not how React updates multiple pieces of state. Instead, these state updates will actually get batched.into just one state update for the entire event handler.
+-- automatically batches state updates in this way is yet another performance optimization that React gives us out of the box. 
+-- Some time we need urget a state in react then then the solution from escaping from the batching is pass a call back function update state on previous state.
+---in event handler functions, like our reset function.
+That's because before React 18, React only did automatic batching in event handlers,
+but not in situations that happen
+after a browser event has already happened.
+However, there are certain very important situations
+in which we do need to update state,
+long after a browser event, like a click, has happened.
+Examples of that are timeouts and promises,
+for instance, we might want to run our reset function
+only a second after a click event,
+or we might want to run it after some data has been fetched.
+So it would be nice to also have automatic batching
+in those situations to improve performance, right?
+Well, that's actually one of the important features
+that React 18 gave us.
+So before React 18, if this reset function
+was called by a timeout, or by a promise,
+state updates inside the function would not be batched.
+Instead, in these situations, React would actually
+update the state variables one by one, and therefore,
+in this case, render three times.
+Now another case is handling native events using DOM methods
+such as addEventListener, where state updates also used to not be batched, but now they are.
+So again, if you're using the latest React version,
+you will now get automatic batching all the time,
+in which automatic batching can be problematic.
+So if you ever find yourself in a situation like that,
+you can just wrap the problematic state update
+in a ReactDOM.flushSync function,
+
+11.what is event bubbling and event capturing,event propagation, evetn delegation?(read mdn documents)
+12.  how event delegation done by react?( At render phase react places all the event handlers at the root node of the Dom tree. so events can be handled by at event bubbling phase.)
+13. how the react events are diffrent from vanilla js events or what diffrent between synthetic event and native event.?(all syntetic events are bubbled  only diffrence is lies betweeen e.preventDegault and onClickCapture check ppt)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+1.what is stale closure in use Effect? 148 stale closure is bug in java script it created beacuse of js closure features. what happend that function rember it parent scope varible even if the parent enviroment scope is vanished, so in react when dependencies are not written properly then use effect will rember only parent enviroment scope variable rember even if it changed due to re-renders.
+2.why effect use in component.?( It's for syncronized our component to some external system.)
+3.What is clean up function in Use Effect?(function that we return from effect. used for cure from race condition. It clean the effect of last effect. It will run only at a time of re render or at component Unmounting from dom.
+4.What is Race Condition in React? if one api call taking time in use effect on the mean the component re- render then a anthore req for api comes in it arise race condition. cure is clean up function
+5. what is closure and how it works for clean up function?  basically a closure in JavaScript means that a function will always remember all the variables that were present at the time and the place data function was created. cleanup function rember all the component variable due to closure. even after the component unmount from the dom.
+6. How to use Abort controller in to use Effect to cancel api request. (Its use in cleanup function to abort the api call between re- renders.
+7.How to do Dom manipulation IN React using use Effect? 
+8. How to handle Key press event in React? (using use Effect Hook beacuse it interaction with outside system.)
+9.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Rules for Hooks:
+1.hooks should render in the sequnse as they had render in last render if you interduce a condinal hook or early return before all hook got excuted that will cause a bug in react.so you can't render ahook conditionally.
+2.don't update state in upperlevel code instead of update in event Handler or use Effect.
+3.useState takes a argument as set to initial state but React only look for this argument only once when component mounted first time. not in render update 
+4.when a intila value of useState is depends on some sort of computertion then we should pass a fuction in use state.(lazy initial state)
+5.states are imutable  we have to return a new state variable in setState.
+6.state Updation is asyncronus operation which is done in batching, use State is nor directly updating the state instead of it it happen th js engine is free after the excution of the event handler function beacuse js engine is single thread.
+
+2.what is Ref
+ref is a refrence which can be used by the useRef hook, the use cases of ref are for preserving a variable across multible re renders, select and storing the dom elements
+3.what is the diffrence between ref and state?
+4. why ref can't be read write(mutate) current property  in render logic? it should avoid, it will create  a miscilenus concequences. )
+5.ref IN JSX should avoid instead use state.
+6.what is custom hook in react? Basically custom hooks are simple javaScript functions who contain only the function logic. Sharing logic between components 
+7.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+class component swection;---
+
+
+1.why we need to bind methods of class component?( because we need to give access to that method of current instance component.
+2.what is class fields in javaScript, How can we use this feature so we can remove boiler plate code of react class component?(using the modern JavaScript class fields feature.we can basically declare properties directly on a component instance, right in the class definition, so  now this is already bounded outside in function so need of this and bind the functions
+lecture 181
+3. what is component life cycle?(lifecycle methods are essentially special methods that all React components get access to, and which we can use to run side effects at different points of the component lifecycle.) every component in react own a lifcycle in which there are diffrent diffrent phases-- mounting updating unmonting: so in these phases diffrent diffrent methods would run, 
+mounting phase:-- in this phase mounting  componentdidmount method excuted it excuted when the component is mounted into the dom, use effect without dependecies, only run at fiesr render
+updating phase:-- componentDidUpdate will excute. React will provide it previous prop and previous state, it excute every re render, like use effect hook with dependcies. 
+unmounting phase:-- in this phase componentWillunmount will run .
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Use Reducer Hook:
+--Use reducer hook is more advance and more complex way of managing state  instead of useState hook, Now useReducer hook is works with so called reducer function which is a pure function that take a previous state and so called action and retuen current state.
+ const [ currentState, dispatch] =useReducer( reducerFunction, intialState)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Router
+npm i eslint vite-plugin-eslint eslint-config-react-app --save-dev 
+  .eslintrc.json
+{extends:" react-app"}
+
+step 3 vite.config.js
+import eslint from vite-plugin-eslint
+
+install eslint into vite project
+
+
+1.what is SPA? 
+2.what is the diffrence between NAV Link and the LINK component? (Nav Link is get a active class when we click on it other inactive link not)
+3.why we use css modules in React? (to avoid the selction of elements of same class, css modules provide a unique class to every class.)
+4.How to make a global class in css modules? ( we can make global class by using global key word so it will be applied on to every element having that class name syntax :global(.class)
+5.what is index route mean react-router?( index router is default route  for the parent url)
+6.how to create children route? By placing childeren routes between the opening and the closing tag of the parent route.
+7.what is the outlet in react-router?(outler decides where we want to render our child route components into parent component)
+8.How can we store the states into the URl? setting state in url means is setting params  or queryString in URL by react-router hook (useSearchParams()) or to props of link attribute)
+9.HOw can we store or set or read query string in URL?( URL is ?querystring can be set by or read by useSearchParams?)
+ setSearchParams now also takes a function, similar to the useState hook, to access the previous query params object to update from.
+10.what is the diffrence between useParams and useSearchParams?
+11.how to navigate between diffrent routes programatically and dicleratively using useNavigation and <Navigation/> component? lrcture 217,218
+
+
+
+React router with data fetching: 
+
+if we want to use new data fetching and loading capabities in to react-router then we should use the create browser router feature in react router
+
+1.what is loader prop in React Router?
+ We can fetch data using Loader prop in react router. receive the value using useLoaderdata() hook.
+
+2. diffrence between navigation and navigate in react-router?
+
+3. actions in react router? -- Basically actions are use to mutate or change the Remote State in React Application. 
+
+4.useRouterError, useNavigation() hook? usenavigation hook tells every thing about the navigation of the page, so we to build page navigation pending indicater and optimistic UI on data mutation.
+
+5 Form in react-router> FORm is element which allow us to pass the data into action for mutation of data without state managemnt and handler functions. lec-291
+6 redirect function used to redirect req to the server.
+7. useActionData() hook is used for  fetching the error from the action functions 
+8. useFetcher() hook is used to mutate get the datat without navigation page. the react-router library is giving the mutate the data of get data on navigation so without navigation we can do it using the use Fetcher hook.
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+context::---
+context basically relays on three things : provider:-as we know what it does,
+ value: it can be a function or state which we want to provide to consumer
+ consumer: who is consuming the context
+1.how to implement map in website
+2.use navigation('path' , replace:true) for removing to go back to login page again
+3.how to implement protected routes in React ? check lecture 241
+4. How to implement authntication section ? lecture 239
+5.
+
+PostContext.js
+
+const PostContext = createContext()
+ 
+index.js     const state ={post:, handlePost: }
+<PostContext.Provider value={state}> <App/>< /PostContext.provide>
+
+App.js    
+            const state =useContext(PostContext)
+ const  {post, handlePost} =state
+ 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+perfomance optimization and advance use Effect Hook
+
+How React Works-- when a parent component is re-render then all the child component is re render again even if the props is still same. it can be a big droback in perfomance 
+
+1.what is profiler in react devtools?(So with the profiler,we can basically analyze renders and re-renders.So we can see which components have rendered,see why they're rendered,and also how long each render took.)
+2.what are the diffrent type of optimization in react to improve perfomance?
+Ans: mainly three type render optimization, improve app speed and optimization, Reduce bundle Size.
+3.How to improve perfomance optimization of wasted rerenders using children Prop?
+Ans: A children prop  component passed as argument so it already created for that component so there no re render hapeened when call parent render again more lec-245 
+4.wha is the use of memo?(we are memorizing a function)
+Ans: memo is ued to memorization the component so if the props of child component( don't change  then child component not rerender even if parent component is render.
+     But their is issue with memo function when we are pass object or function the child commponent wrapped in memo function  it will render if props not changed because when memo compare two prev props andcurrent props  in js object and function  are not same even if they are same memo is fail only works for premetive values. (when the parent is re render it will create all the values again so new created object function are not same so we have to find a way of preserving those values in parent even if parent rerender ) 
+5.what is the use case of useMemo in react?
+Ans: memo function not able to memoize the props so it memoize by using useMemo(), it will store the values in react memory so react is utilize it. it will preserve the values between the re- rendrs and returned values from cache, but when the dependencies change use Memo return new value and preseve that this time the child component is re-render.
+6. what is the use case of  useCallback hook?
+Ans:- UseCallback hook is  use to rember the value of a function which will preserve between re-renders. so then memo function compares it.
+7.How can we optimize a context? value of context is a object 
+8.How to prevent to create use Effect infinite loops when it dependencies changing when every time effect runs.?(using useCallback and useMemoHook)
+9.what is optimizinng bundle sizing and how to do it using code splitting?( when client navigate to the application, serversend a bundle to client it a java script file(which bundled by the vite or wabpack) if it huge the takes time to download at clent side. code spliting as name says takes the bundle and split it in to multipale part,as the application need they are download over time this process callled lazy loading. It is really perfomavce gain
+10.what is lazy loading?
+11.what are the rules for using use Effect?
+12.
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Redux section:--
+npm i redux,react-redux, redux-thunk redux-devtool-extension
+
+1.what is redux, explain?
+redux is a global state managemet library. when the state changes in store all the subscibe component will re-render again. four things in react action, reducer, store, 
+ component dispatch action to the store the reducer function receive it and update the state. rducer function can't do api call and can't mutate the existing state.
+2.what is action creater? 
+ redux developer follw a convention to create action. it' a function which return actions. eg: dispatch(actionCreature())
+3.middleware in redux?  npm i redux-thunk
+  middleware in redux are for doing api calls, we are using thunk , action creatre we return a function whose return the acton for store,it rceived by redux a dispatch and get state as argyment. when dispatch function in component receive function receive a function instead of object it will knows there is some asynchronus operation happening.
+return async function(dispatch,getState){}
+4.
+
+5.thun? is amiddleware sits between dispatch and the reducer function, thunk is the native way of writing action creates in redux toolkit.
+6. reSlect library? Its use in redux for optimizing out selector function argument in redux.
+7. extra reducer:  they allows to responds the createSlice for action creaters that are creates bestide the action creates of itself. exmple the thun action creaters are not create implicetly by the create Slice method. it have a builder callback funtion which is use to call the original reducer functions.
+
+8.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+- tailwind customization done h-[500px]
+
+
+------------------------------------------------------------------------------------------------------------
+
+-reSelect library
+--------------------------------------------------------------------------------------------------------------
+
+React-Query:
+-useQuery Hook and useMutation Hook
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+Advance React Pattern:-
+
+1) Render Props Pattern:- component received a function which contain a statful logic and UI and render it
+2)compound component pattern: Its use for define that two component must work together. assign component as other componen properties.
+3)debouncing
+
+------------------------------------------------------------------------------------------------------------------------
+Replacing Redux with React Hooks:
+
+
+
+------------------------------------------------Next.js-------------------------------------------------------------------------
+1.why we need SSR(server side render website)?
+-the first data fetching happen at server not client which makes initial load of application fast. User doesn't need to wait till spinner.
+2.hydration meaning?
+- Its a process where static html  becomes interactive using javascript bundle. Html hydrate with js bundle.
+ 
+** Render an application at server side create an HTml code but when it excuted at client side its not interactive so we need hydration for iteractivity. 
+** After the website or HTML painted at client React Create a component tree at client side and compare it with SSRDom they must be same so react will adopt the SSR DOM. Now React doen't need to paint the Application to Browser react is adopted already painted application(React connect all the eventlistners and interactivity to the SSR application.
+
+3.Hydration Error?
+ when React created dom and SSR dom is different then hydration error comes in this will create hydration error. This will create a bad user experience.
+ causes: 1. incorrect html nesting div inside a p
+         2. different data used for rendering like server use some other and client have some other for fetch.
+         3. Using Browser API at server
+         4. side effects   and so on
+
+4.What is Next.js
+- A React Framework for Web. 
+ - meta framework built on top of React.
+ -opionated way of building a React framework.
+-allow us build complex full stack app.
+-allow us to us cutting edge React features that need to be integrated into a framework: Suspanse, Server-Components, server Action, streaming
+
+5. what are the key Feature of Next.js
+  - server side Rendering( dynamic and static Rendering)
+  -File base Routing Convention.
+  - Data fetching and mutation on the server.
+   -optimization -image, seo, fonts, preloading.
+
+6.  Diffrent type of Routing in Next.js?
+  - APP Router vs Page Router
+   1. implemented in Next.js v13.4  vs Next.js v1 2016
+   2. recommended for new project  vs legacy way
+   3.  implement React full stack architecture  vs  over all more simple 
+  4.  Easy fetching with Fetch() in compoents vs   Data fetching happen using fix api's  getStaticProps and gerServerSidePRops.
+  5. Easy to create layout and  loaders  vs  layouts are pretty confusing to implement.
+  6. more advance routing.(only APP router)
+   7. better Developer and user experience.
+  8. Caching is aggressive and pretty confusing.
+
+** In React, UI is a state changing function UI = f(state).
+
+7. What are the React Server Component?
+  -  these type of component are new part of React component tree. These component executed at server not at client. server component don't have interactivity. so 0 js Required to them.
+   Now there are two type of component in React- server and client component. In Next.js  server component are default component.
+   
+8. client server boundary?
+    use client keyword is basically creates a boundary between client and server component. it create a client subtree where children of that element doesn't need to use 'use client' keyword.
+    This tree will execute at client side only.
+
+9. import v/s render?
+   import means one component import another one using import syntax.
+   render means one component call another component  or one component execute the other component. 
+
+10. client component v/s server component?
+  -- client can use state v/s server can't
+ -- client can lift state v/s server can't
+ -- props can use v/s serialize props can use( function and classes can't pass) 
+ --  both can fetch data.
+ -- only import client component ( can't go back in client server boundry) vs both component can import.
+ -- client can render server and client component but server component should be passed as props  v/s server can render both client server component.
+  -- re render when the state changes v/s re- render when the url(navigation) of server changes.
+
+** server component are tytely coupled with the route which they written for. might fetch data on rerender.
+
+** All the component are render at server at initial render a server no matter it client or server then Html is send to client 
+
+   Reactdom.toString() and  rendertoRedableStream().
+** loading.js is  Gloabally available for any data which is loading.  it replace the file with the concern loading then loading with the concern data using streaming( this feature need js to be inable to browser).
+
+** Traditional React Rendering:--
+    writing react component then react create a tree of component instance then execute them. WE call it render by calling component function. this will create a React tree or virtual dom. All the changes then pass to react dom and then dom.
+
+**RSC Rendering:--
+  React create a virtual dom at server we call it RSC payload. The RSC payload contain the Reeact Element (Server compone executed) an placeholder where client component tree executes. This RSC payload sent at client. Then client side  react creates a full virtual dom with  React Element and now on the process go on as tradional React.
+
+** In traditional way the process of creating the React tree have one phase only With the server component the process on two phase. first phase at server and second at client for create full virtual dom. These phase doesn't wait for each other instead changes are streamed at client from server.so In resultant it will give a better experience to user.
+
+** In RSC process they are creating a RSC payload instead of fully render HTMl because using RSC payload it will preserve state for next UI.
+
+** UI = fun(data)(state) 
+
+
+** RSC and SSR  are both two separate  technology they are combine with Next.js
+** Now the client and server component are execute at server
+-- what the  next.js do is combine the concept of RSC and SSR. For any individual it is not possible to combine both the process on it own.
+    the server and client are in reality, they are React client and React Server. What the  Next.js is do it places both the React server and React Client at the running web server which actually sends the generated html to client. 
+
+** Final Summery
+ - Intial Render happen at server side HTMl generated using SSR and sends at the client.
+ -  with HTml, RSC payload and multiple js bundles also sends to client so only client component can hydrated.
+ -  SSR happen only for initial or first render then onward it works as RSC Render.
+ - when the server component re- render  every time a RSC payload sends to client not generated HTML. 
+ - data fetching happen into server component. only if necessary to fetch at client then fetch at client.
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+to copy module.css files directly sneppet
+
+/*
+"importCSSModule": {
+    "prefix": "csm",
+    "scope": "javascript,typescript,javascriptreact",
+    "body": ["import styles from './${TM_FILENAME_BASE}.module.css'"],
+    "description": "Import CSS Module as `styles`"
+  },
+*/
+
+
+
+
+
+
+Array.from({length},(_,i)=>i)  output=[1,2,3,4,5]
+Array.from({length:5},(_,i)=><span>contenet</span>)  output= list of element
+
+lecture 13 for how to build react without create react app.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+diff declaration to none -- remove git in react	
