@@ -383,6 +383,81 @@ Replacing Redux with React Hooks:
  
 
 
+Q. can we set Meta tag using Next?
+Q. How to set Favicon using Next.js?  icon.png/jps.. any file in folder
+Q. How set Font for our Application?
+
+Q. How to Image component works in Next.js?
+   Next js optimise the image according to view port at client.
+
+Aspect-squre  , Grid ,
+
+** loading.js  means it activate streaming in Next.js application. for streaming java script should be enabled in browser.
+
+
+Q. Fiber Tree?
+ --the fiber tree is basically an internal representation of each component instance and DOM element of our app. It is mutable data structure which is never destroyed
+
+
+-----------------------------------------------------Data Fetching, Data Streaming, Data Rendering------------------------------------------------------
+
+** Suspense Summery
+
+If some component is fetching data or its doing some activity which can be suspended the component. So In the Reconcilation phase the that component or its tree is  replaced by the suspense component. 
+
+-- the difference between the loader.js and suspace is loader is excuted inside the component and suspense  rendner instead of component.
+
+ Q. how Suspanse work internally.
+  React is create Fiber tree react is track all state and changes. There is react built in component in  Activity which internally have both the component and  suspense component . default activity === 'visible' so component show. if it suspended it will replace with invisible and  suspense component show.
+
+ -- In React suspense never show again ( once shown) if its wrapped in transition on react. Next.js pageNavigation is wrapped in transition so in next we have to reset suspense with a unique key prop.
+
+Q. how to suspense is know that the component is suspended?
+ -- component is return  a promise by this the suspense know that the component is suspense. 
+
+Q. How to Generate Dynamic Route?
+  given a folder name in [name]. access it in props as {params} ={name:'routeno'}
+
+
+Q.How to generate dynamic metadata?
+ -- Generate Meta data using genrateMetadata({params}){
+retutn{...metaDataObj}
+}
+
+Q. Error Boundry?
+
+ error boundry can be  created using error.js file. it will caught only render error not the call back errors also it might not catch the root layout errors also. For global layout error we have to create global-error.js file where we have to decide all meta tag other boiler plates also.
+
+Q.not- found error?
+ not-found.js page will appear for this type error notFound() 
+
+** Data Rendering**
+
+-Next.js is react framework so  rendering is done by the react by RSC payload and virtual DOM.
+- Both client and server side component render at server on the initial render.
+- Next js server sider rendering split in routes.
+- Each route can be static(also called pre- render) or dynamic route.
+-  There is also partial pre rendering (PPR) which mixes dynamic and static route in same route.
+
+Q. static Rendering v/s Dynamic Rendering?
+  - HTML is generated at built time  or periodically in  the background by refetching the data (ISR Incremental static Regenration)   
+
+** static route are cached at CDN. Dynamic route are become serverless function. This serverless functions computing doen't happen at central server like tradional node.js project it happen at edge Networks. this edge Network is distributed around the world.
+
+
+Q.generatStaticParams()?
+  -The generateStaticParams function can be used in combination with dynamic route segments to statically generate routes at build time instead of on-demand at request time.
+
+Q. SSG  Static Side Generation?
+--  enable a static export, change the output mode inside next.config.js:
+  -Static Genration ships the RSC payload from server to client.
+   images are not work in SSG. 
+
+Q.PPR (Partial Pre Rendering) ?
+  Most pages doesn't need to 100% static or dynamic. Its a new rendering strategy which combine the static and dynamic rendering.
+  most of the part is served from the server and dynamic part of route is served from the only dynamic component is replaced by the suspance API. It will be served latter when it will be rendered.
+
+
 
 
 
