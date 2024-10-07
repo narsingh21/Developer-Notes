@@ -292,7 +292,7 @@ Replacing Redux with React Hooks:
 - Its a process where static html  becomes interactive using javascript bundle. Html hydrate with js bundle.
  
 ** Render an application at server side create an HTml code but when it excuted at client side its not interactive so we need hydration for iteractivity. 
-** After the website or HTML painted at client React Create a component tree at client side and compare it with SSRDom they must be same so react will adopt the SSR DOM. Now React doen't need to paint the Application to Browser react is adopted already painted application(React connect all the eventlistners and interactivity to the SSR application.
+** After the website or HTML painted at client React Create a component tree at client side and compare it with SSRDom they must be same so react will adopt the SSR DOM. Now React doesn't need to paint the Application to Browser react is adopted already painted application(React connect all the eventlistners and interactivity to the SSR application.
 
 3.Hydration Error?
  when React created dom and SSR dom is different then hydration error comes in this will create hydration error. This will create a bad user experience.
@@ -345,21 +345,21 @@ Replacing Redux with React Hooks:
  -- props can use v/s serialize props can use( function and classes can't pass) 
  --  both can fetch data.
  -- only import client component ( can't go back in client server boundry) vs both component can import.
- -- client can render server and client component but server component should be passed as props  v/s server can render both client server component.
+ -- client compoent can render server and client component but server component should be passed as props  v/s server can render both client server component.
   -- re render when the state changes v/s re- render when the url(navigation) of server changes.
 
-** server component are tytely coupled with the route which they written for. might fetch data on rerender.
+** server component are typicaly coupled with the route which they written for. might fetch data on rerender.
 
 ** All the component are render at server at initial render a server no matter it client or server then Html is send to client 
 
-   Reactdom.toString() and  rendertoRedableStream().
+   Reactdom.toString() and  rendertoReadableStream().
 ** loading.js is  Gloabally available for any data which is loading.  it replace the file with the concern loading then loading with the concern data using streaming( this feature need js to be inable to browser).
 
 ** Traditional React Rendering:--
     writing react component then react create a tree of component instance then execute them. WE call it render by calling component function. this will create a React tree or virtual dom. All the changes then pass to react dom and then dom.
 
 **RSC Rendering:--
-  React create a virtual dom at server we call it RSC payload. The RSC payload contain the Reeact Element (Server compone executed) an placeholder where client component tree executes. This RSC payload sent at client. Then client side  react creates a full virtual dom with  React Element and now on the process go on as tradional React.
+  React create a virtual dom at server we call it RSC payload. The RSC payload contain the Reeact Element (Server component executed) an placeholder where client component tree executes. This RSC payload sent at client. Then client side  react creates a full virtual dom with  React Element and now on the process go on as tradional React.
 
 ** In traditional way the process of creating the React tree have one phase only With the server component the process on two phase. first phase at server and second at client for create full virtual dom. These phase doesn't wait for each other instead changes are streamed at client from server.so In resultant it will give a better experience to user.
 
@@ -405,7 +405,7 @@ Q. Fiber Tree?
 
 If some component is fetching data or its doing some activity which can be suspended the component. So In the Reconcilation phase the that component or its tree is  replaced by the suspense component. 
 
--- the difference between the loader.js and suspace is loader is excuted inside the component and suspense  rendner instead of component.
+-- the difference between the loader.js and suspace is loader is excuted inside the component and suspense  render instead of component.
 
  Q. how Suspanse work internally.
   React is create Fiber tree react is track all state and changes. There is react built in component in  Activity which internally have both the component and  suspense component . default activity === 'visible' so component show. if it suspended it will replace with invisible and  suspense component show.
@@ -447,15 +447,17 @@ Q. static Rendering v/s Dynamic Rendering?
 
 Q.generatStaticParams()?
   -The generateStaticParams function can be used in combination with dynamic route segments to statically generate routes at build time instead of on-demand at request time.
+   -Every page for respective params is   genrated at build time.
 
 Q. SSG  Static Side Generation?
---  enable a static export, change the output mode inside next.config.js:
+  -It works only when all the routes are static.
+  -enable a static export, change the output mode inside next.config.js:
   -Static Genration ships the RSC payload from server to client.
-   images are not work in SSG. 
+  -images are not work in SSG. 
 
 Q.PPR (Partial Pre Rendering) ?
   Most pages doesn't need to 100% static or dynamic. Its a new rendering strategy which combine the static and dynamic rendering.
-  most of the part is served from the server and dynamic part of route is served from the only dynamic component is replaced by the suspance API. It will be served latter when it will be rendered.
+  most of the part is served from the server and dynamic part of route is served from the only dynamic component is replaced by the suspance API. It will be served later when it will be rendered.
 
 
 
