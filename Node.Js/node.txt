@@ -1,0 +1,77 @@
+
+
+--------------------------------Advance Node---------------------------------------------------------
+
+Event loop?
+
+-Every single time a the event  loop runs its refer to as single tick.
+
+
+How Node js  Application works in Node Enviroment:----
+
+const pendingTImer =[];
+const pendingOsOperation=[];
+const pendingLongRunnigOperation=[];
+
+ function NodeProgram() {
+...........
+.....
+.....}
+
+
+function shouldContinue(){
+  checkone: any pending setTimeout, setInterval, setImmediate?
+  check two:  any pending OS Task? (like listing on a Port)
+  check three: any long running task which is pending.
+
+
+
+}
+
+
+eventLoop(shouldContinue()){
+
+one tick execute body.... 
+  1. node look at timer check if any timer is completed excuted that timer. setinterval setTimeout
+
+2. node look at pendingOs operatin or long running operation then execute their call back also.
+
+3. pauser execution and wait for --
+ - new pending os task has to done.
+- a new pending operation done.
+- a timer has to done
+
+4. node look at set immediate
+
+5.Handle any close Event.
+   
+
+
+}
+
+
+**should continue excutes every time after tick
+** when we start an node  program the libuv is create the thread pool automatically.
+
+
+Q. edit ThreadPool size ? 
+process.env.UV_THREADPOOL_SIZE= 5;
+
+Q. can we use threadpools to excutes our js code or only node js function have excess for it?
+   We can write custom js that uses the thread pool.
+
+
+Q.What function in node std library uses the thread pool fun?
+--  all fs module, some crytpo func -- also depend on OS  Window or Linux.
+
+Q. How does the threadpool stup firs in to the event loop?
+   Task are pending are run by the  thread pool and excutes by  event loop.
+
+Q. Libuv OS Delegation?
+  -- Node.js and libuv doesn't do  the Network request. The actual os request is done by the os system. so there is no use of thread pool or eventloop in this scenario.
+
+Q. which of the nodeJS functions are uses OS async Helper feature?
+ Almost Network related stuf uses the This OS async Helper.  network request, network response , eventlistner on network?
+
+Q. how the OS async Helpers are relate to Event Loop?
+  These task are shown in the Pending OS Task of Application to Event Loop.
