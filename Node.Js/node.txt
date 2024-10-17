@@ -1,4 +1,19 @@
+------------------------------------mongoose------------------------------------------------
 
+-create Modal 
+ const Modal= mongoose.modal('Modalname',schema)
+
+ - Running Query using Modal
+    Modal.find({name:'narsingh',city:'noida'},'name address',{skip:5})
+    await Modal.findById(id).exec(); // id is equalent _id 
+    Modal.findByIdAndDelete(id) // id is equalent _id 
+    Modal.findByIdAndUpdate(id,update) // id is equalent _id 
+
+    Modal.findOne({name:'narsingh})
+    Modal.findOneAndDelete({name:'narsingh'})
+
+- Aggregation :An aggregation pipeline consists of one or more stages that process documents:Each stage performs an operation on the input documents.
+ For example, a stage can filter documents, group documents, and calculate values.
 
 --------------------------------Advance Node---------------------------------------------------------
 
@@ -9,7 +24,7 @@ Event loop?
 
 How Node js  Application works in Node Enviroment:----
 
-const pendingTImer =[];
+const pendingTimer =[];
 const pendingOsOperation=[];
 const pendingLongRunnigOperation=[];
 
@@ -75,3 +90,42 @@ Q. which of the nodeJS functions are uses OS async Helper feature?
 
 Q. how the OS async Helpers are relate to Event Loop?
   These task are shown in the Pending OS Task of Application to Event Loop.
+
+  Q. how too increase Node application perfomance?
+   - By clustering: make  multiple copy of our  node application.
+   - By using thread pool.
+-------------------------------------------clusting-------------------------------------------------------------
+  ** Blocking the Event Loop ** If there is something which blocks the event loop like some perfomance intensive task( executing a loot of Java script code) then our next works around like db fething, any other task will be blocked.
+     for escaping these kind of scenerion in cluster enviroment so  our application get multiple instamce of our application. it have their pro and cons.
+
+Q. Cluster Manager?
+   which is responsible for our node clusters health. i it create and manage the cluster worker instances
+    cluster module is required for creating clusters
+     cluster.fork()
+
+   Q. Do request using OS direct using cmd?
+     ab -c 1 -n 1 localhost:3000/
+
+     Q. PM2
+      Its a open source cluster management system.
+       use application using cluster pm2 start index.js -i 0 , pm set the no of cluster to no logical core of your application.
+        pm2 list - health list
+        pm2 show index - detail ifno about child
+        pm2 monit -  show logs  
+        pm2 delete index[application name] - delete the app. or stop all child
+
+        talk about node in cluster mode for dramticallu increasing permonse in concurent havy duty lifing that out application have to do.
+
+        --------------------------------workers pool------------------------------------------------------------------
+
+ webworker-thread is third library.
+
+ ------------------------------------------------------------------------------------------------------
+  Q.  how to increase the perfomance of DB quering.
+    - using indexing.
+    - using some caching server
+ Q. Redis 
+     redis is inmemory data store. A tyni database which stores in our machine which allow you to read and write data very quickly.
+
+
+  
