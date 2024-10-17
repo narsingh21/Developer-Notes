@@ -379,6 +379,16 @@ Replacing Redux with React Hooks:
  -  SSR happen only for initial or first render then onward it works as RSC Render.
  - when the server component re- render  every time a RSC payload sends to client not generated HTML. 
  - data fetching happen into server component. only if necessary to fetch at client then fetch at client.
+
+
+** Therory About client and server Boundry:
+  In RSC environment we doen't need the API for data sending to client side , most of the time.  
+  A component Instance can be both server and client it depends where it imported.
+
+Q. RSC environment importing vs rendering?
+  1. for importing there is dependency tree vs for rendering there is client tree. more about this in PPT.
+  2.  client component can import only client component ( can't go back to client server boundry) vs server component can  import client and server component both.
+ 3.  client can render client and server component( which are passed as prop only). server component can render server and client component.
  
  
 
