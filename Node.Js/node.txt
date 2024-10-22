@@ -1,4 +1,5 @@
---Node.js is open source server Enviroment built on crome v8 javScript engine for excuting java script code outside browser. It provide event drive, non-blocking(asynchronus)  i/o and cross-plateforn run time eviroment for building for building highly scalable cross plateform enviroment to build serverside application in javascript.
+--Node.js is open source server Enviroment built on chrome v8 javScript engine for excuting java script code outside browser. 
+It provide event drive, non-blocking(asynchronus)  i/o and cross-plateforn run time eviroment for building for building highly scalable cross plateform enviroment to build serverside application in javascript.
 
 ---Node.js comes with REPL( Read eval print loop) is a enviroment like unix and cmd. user can intrect with node with commands
 
@@ -19,10 +20,10 @@ var http.createServer((req,res)=>{
 
 
 
-API: A peice of software can be used by another peice of software, in order to allowed to talk to each other.
+API: A piece of software can be used by another piece of software, in order to allowed to talk to each other.
 
 Rest API:
-Rest is a architecture we build api according to that, rest is based on resources on the resources we are applying http methods to do crud operations
+Rest is a architecture we build api according to that, rest is based on resources on the resources.We are applying http methods to do crud operations.
 
 
 Resources 1: http://localhost:8080/api/v1/movies   -get,post. patch, delete, update (http methods on each resources)
@@ -102,7 +103,7 @@ Error handling:
 ndb: is a debugger tool which is introduced by the google for debugging our code.
 
 
-1 way: for error handling in express we have to define a errot handling middleware. this middleware have four arguments  so express will recognise that it a errot handling middleware.
+1 way: for error handling in express we have to define a errot handling middleware. this middleware have four arguments  so express will recognise that it a error handling middleware.
 
 //: now we have to create a global error machanism: we had created a AppError class, this class will create error tofor us , now wherer the error is creating we will call error controller there(errro middleware).
 
@@ -182,7 +183,7 @@ cross side scripting xss attacks
 ------------------------------------------------------------Advance Node Js--------------------------------------------------
 
 Q.v8?
-- v8 projector engine is open source projct which is created by google which allow us excute js outside browser.
+- v8 projector engine is open source project which is created by google which allow us excute js outside browser.
  - v8 translate or interpret the js code which we write on java script into c++ so
 
 Q. libUV ? c++ library
@@ -201,6 +202,11 @@ Q. Thread ?
 
 -create Modal 
  const Modal= mongoose.modal('Modalname',schema)
+
+ -three way to execute the query in mongoose to mongo db.
+  query.exec((err,result)=>console.log(result))
+  query.then(result=>console.log(result))
+  const result = await query();
 
  - Running Query using Modal
     Modal.find({name:'narsingh',city:'noida'},'name address',{skip:5})
