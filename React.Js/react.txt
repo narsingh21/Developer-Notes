@@ -228,10 +228,17 @@ Ans: memo function not able to memoize the props so it memoize by using useMemo(
 Ans:- UseCallback hook is  use to rember the value of a function which will preserve between re-renders. so then memo function compares it.
 7.How can we optimize a context? value of context is a object 
 8.How to prevent to create use Effect infinite loops when it dependencies changing when every time effect runs.?(using useCallback and useMemoHook)
-9.what is optimizinng bundle sizing and how to do it using code splitting?( when client navigate to the application, serversend a bundle to client it a java script file(which bundled by the vite or wabpack) if it huge the takes time to download at clent side. code spliting as name says takes the bundle and split it in to multipale part,as the application need they are download over time this process callled lazy loading. It is really perfomavce gain
+9.what is optimizinng bundle sizing and how to do it using code splitting?
+( when client navigate to the application, serversend a bundle to client it a java script file(which bundled by the vite or wabpack).
+ If it huge the takes time to download at clent side. code spliting as name says takes the bundle and split it in to multipale part,
+ as the application need they are download over time this process callled lazy loading. It is really perfomavce gain
 10.what is lazy loading?
+(lazy returns a React component you can render in your tree. While the code for the lazy component is still loading,
+ attempting to render it will suspend. Use <Suspense> to display a loading indicator while it’s loading)
 11.what are the rules for using use Effect?
-12.
+12. forwardRef ?
+  (forwardRef lets your component expose a DOM node to parent component with a ref.)
+
  
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -469,6 +476,19 @@ Q.PPR (Partial Pre Rendering) ?
   Most pages doesn't need to 100% static or dynamic. Its a new rendering strategy which combine the static and dynamic rendering.
   most of the part is served from the server and dynamic part of route is served from the only dynamic component is replaced by the suspance API. It will be served later when it will be rendered.
 
+Q. how to makee API in Next.js?
+ - Using Route.js file  there should be fucnction which  is Like GET POST DELETE and PAtch shold be exported.
+ - this file wil return JSON instead of html.
+ - route.js  and page.js can't be existed in the same component.
+
+ --------------------------------------------------------authentication and Autherization in Next---------------------------------------
+
+ clerk and Lucia services 
+
+ Q. Server Actions?
+  - Server action allow us add interactivity at server component.
+
+  Q.
 
 
 
@@ -493,7 +513,7 @@ to copy module.css files directly sneppet
 */
 
 
-
+remove unused import shit+alt+o
 
 
 
