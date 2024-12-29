@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="OrderProcessing" name="E-commerce Order Processing" isExecutable="true">
+    <!-- Start Event -->
+    <bpmn:startEvent id="StartEvent" name="Customer Places Order">
+      <bpmn:outgoing>Flow_ValidateOrder</bpmn:outgoing>
+    </bpmn:startEvent>
+
+    <!-- Validate Order -->
+    <bpmn:task id="Task_ValidateOrder" name="Validate Order">
+      <bpmn:incoming>Flow_ValidateOrder</bpmn:incoming>
+      <bpmn:outgoing>Flow_CheckInventory</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- Check Inventory -->
+    <bpmn:exclusiveGateway id="Gateway_CheckInventory" name="Inventory Check">
+      <bpmn:incoming>Flow_CheckInventory</bpmn:incoming>
+      <bpmn:outgoing>Flow_InStock</bpmn:outgoing>
+      <bpmn:outgoing>Flow_OutOfStock</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:task id="Task_InStock" name="Item In Stock">
+      <bpmn:incoming>Flow_InStock</bpmn:incoming>
+      <bpmn:outgoing>Flow_ProcessPayment</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_OutOfStock" name="Notify Customer">
+      <bpmn:incoming>Flow_OutOfStock</bpmn:incoming>
+      <bpmn:outgoing>Flow_EndOutOfStock</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- Payment Processing -->
+    <bpmn:task id="Task_ProcessPayment" name="Process Payment">
+      <bpmn:incoming>Flow_ProcessPayment</bpmn:incoming>
+      <bpmn:outgoing>Flow_PaymentGateway</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="Gateway_Payment" name="Payment Successful?">
+      <bpmn:incoming>Flow_PaymentGateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_PaymentSuccess</bpmn:outgoing>
+      <bpmn:outgoing>Flow_PaymentFailure</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:task id="Task_PaymentSuccess" name="Payment Success">
+      <bpmn:incoming>Flow_PaymentSuccess</bpmn:incoming>
+      <bpmn:outgoing>Flow_PackageOrder</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_PaymentFailure" name="Notify Payment Failure">
+      <bpmn:incoming>Flow_PaymentFailure</bpmn:incoming>
+      <bpmn:outgoing>Flow_EndPaymentFailure</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- Packaging and Shipping -->
+    <bpmn:task id="Task_PackageOrder" name="Package Order">
+      <bpmn:incoming>Flow_PackageOrder</bpmn:incoming>
+      <bpmn:outgoing>Flow_ShipOrder</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_ShipOrder" name="Ship Order">
+      <bpmn:incoming>Flow_ShipOrder</bpmn:incoming>
+      <bpmn:outgoing>Flow_EndProcess</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- End Events -->
+    <bpmn:endEvent id="EndEvent_ProcessComplete" name="Order Completed">
+      <bpmn:incoming>Flow_EndProcess</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:endEvent id="EndEvent_OutOfStock" name="Order Canceled">
+      <bpmn:incoming>Flow_EndOutOfStock</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:endEvent id="EndEvent_PaymentFailure" name="Order Canceled">
+      <bpmn:incoming>Flow_EndPaymentFailure</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- Sequence Flows -->
+    <bpmn:sequenceFlow id="Flow_ValidateOrder" sourceRef="StartEvent" targetRef="Task_ValidateOrder" />
+    <bpmn:sequenceFlow id="Flow_CheckInventory" sourceRef="Task_ValidateOrder" targetRef="Gateway_CheckInventory" />
+    <bpmn:sequenceFlow id="Flow_InStock" sourceRef="Gateway_CheckInventory" targetRef="Task_InStock" />
+    <bpmn:sequenceFlow id="Flow_OutOfStock" sourceRef="Gateway_CheckInventory" targetRef="Task_OutOfStock" />
+    <bpmn:sequenceFlow id="Flow_ProcessPayment" sourceRef="Task_InStock" targetRef="Task_ProcessPayment" />
+    <bpmn:sequenceFlow id="Flow_PaymentGateway" sourceRef="Task_ProcessPayment" targetRef="Gateway_Payment" />
+    <bpmn:sequenceFlow id="Flow_PaymentSuccess" sourceRef="Gateway_Payment" targetRef="Task_PaymentSuccess" />
+    <bpmn:sequenceFlow id="Flow_PaymentFailure" sourceRef="Gateway_Payment" targetRef="Task_PaymentFailure" />
+    <bpmn:sequenceFlow id="Flow_PackageOrder" sourceRef="Task_PaymentSuccess" targetRef="Task_PackageOrder" />
+    <bpmn:sequenceFlow id="Flow_ShipOrder" sourceRef="Task_PackageOrder" targetRef="Task_ShipOrder" />
+    <bpmn:sequenceFlow id="Flow_EndProcess" sourceRef="Task_ShipOrder" targetRef="EndEvent_ProcessComplete" />
+    <bpmn:sequenceFlow id="Flow_EndOutOfStock" sourceRef="Task_OutOfStock" targetRef="EndEvent_OutOfStock" />
+    <bpmn:sequenceFlow id="Flow_EndPaymentFailure" sourceRef="Task_PaymentFailure" targetRef="EndEvent_PaymentFailure" />
+  </bpmn:process>
+</bpmn:definitions>

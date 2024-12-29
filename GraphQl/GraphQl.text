@@ -1,0 +1,109 @@
+** Restful routing with highly related or relational data can be quite quite chalanging thats why we use graphql.
+ It solve over serving of data.(Heavely nested data)**
+
+
+Q.Schema?
+- Schema is something which tells GraphQL that what kind of data we have in our data base and what is the 
+  relation between them.
+
+   GraphQL.js is library which intract JS application to GraphQL
+   
+  Q. writing query or query type for schema in GraphQL.
+
+   const UserType = new GraphQLObjectType({
+    name:'User',
+    fields:{
+      id:{type:GrapQLString},
+      firstName:{type:GraphQLString}
+      age:{type:GraphQLInt}
+    }
+   })
+
+   Q.RootQuery?
+   A GraphQL root query is the entry point for querying your GraphQL schema
+
+const  RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {
+    user: {
+      type: GraphQLList(UserType),
+      args:{id:{type:GraphQLString}}
+      resolve(parent, args) {
+        // Fetch user from your data source
+        return fetchUsers(); // Replace with your data fetching logic
+      },
+    }
+    users: {
+      type: GraphQLList(UserType),
+      resolve(parent, args) {
+        // Fetch users from your data source
+        return fetchUsers(); // Replace with your data fetching logic
+      },
+    },
+    posts: {
+      type: GraphQLList(PostType),
+      resolve(parent, args) {
+        // Fetch posts from your data source
+        return fetchPosts(); // Replace with your data fetching logic
+      },
+    },}
+  })
+
+
+
+
+nested query: it all about relation of query or data with other query or data
+
+const PostType = new GraphQLObjectType({
+  name: 'Post',
+  fields: () => ({
+    id: { type: GraphQLNonNull(GraphQLID) },
+    title: { type: GraphQLNonNull(GraphQLString) },
+    content: { type: GraphQLString },
+    author: {
+      type: UserType,
+      resolve(parent, args) {
+        // Fetch the author for this specific post
+        return fetchUserById(parent.authorId);
+      },
+    },
+  }),
+});
+
+Q.
+Mutations in GraphQL are used to modify data (create, update, or delete). Below is an example of how to define and use mutations in a GraphQL schema.
+
+// Mutation type
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    createUser: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        // Replace this with your database logic
+        const newUser = { id: Date.now().toString(), name: args.name, email: args.email };
+        mockUsers.push(newUser);
+        return newUser;
+      },
+    },
+    createPost: {
+      type: PostType,
+      args: {
+        title: { type: GraphQLNonNull(GraphQLString) },
+        content: { type: GraphQLString },
+        authorId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        // Replace this with your database logic
+        const newPost = { id: Date.now().toString(), title: args.title, content: args.content, authorId: args.authorId };
+        mockPosts.push(newPost);
+        return newPost;
+      },
+    },
+  },
+});
+

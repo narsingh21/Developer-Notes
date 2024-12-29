@@ -1,0 +1,5 @@
+
+**EventBus**
+-It basically an application which receive event and publish the event to all the services(Listners).
+- Rabbit MQ, Kafka, NATS are open source event bus there.
+-

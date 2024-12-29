@@ -1,0 +1,108 @@
+Algorithm? 
+-A process or set of steps to accomplish certain task.
+
+Problem Solving?
+1. Understand the Problem:- in our langauge.
+2. Concreate examples: - start with simple input , more complex input,  empty input , invalid input,
+3. break it down :- write some sudo code
+4. solve
+5. Refactor
+
+
+
+Q.char code 
+ -47 -58  alpha numeric  0-9
+ -64-91  upper alpha  a-z
+ -96-123  lower alpha A-Z
+
+
+
+** Problem solving pattern **
+
+ 1. Frequency Pattern- 
+   use splice pattern
+   assign frequency in object or MAP
+
+   ex:- aaabbcc ={a:3,b:2,c:2}
+   
+ 2. multiple pointer-
+   pair of zero into an sorted array in minimum iteration.
+   count an unique values into a sorted array.
+   [1,1,1,2,2,3,4,4,5,5]
+   sol:- i
+        [1,1,1,2,2,3,4,4,5,5]
+            j
+           i
+        [1,2,1,2,2,3,4,4,5,5]
+               j
+                 i
+        [1,2,3,4,5,3,4,4,5,5]
+                           j
+      mutate the array find new value usingj replace the i array with new value increase the value of j
+
+
+  3.  sliding window:-
+    make a window in an array the remove the last element and add the next element slide the window.
+
+
+Q.  count integer with same frequency.
+function sameFrequency (a,b){
+    
+    if(a.toString().length!==b.toString().length) return false
+    const obj1 =freqObj(a.toString())
+    const obj2 =freqObj(b.toString())
+    for(let key in obj1){
+       if (obj1[key]!==obj2[key]){
+           return false
+       }
+       
+    }
+    return true
+}
+
+function freqObj( value){
+   const   obj ={}
+     for(const char of value ){
+         if(char in obj){
+              obj[char]+=1
+         }else{
+              obj[char]=1
+         } 
+     }
+     return obj
+}
+
+console.log(sameFrequency (182,2681)) 
+
+Q.Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in.  Restrictions:
+
+Time - O(n)
+
+Space - O(n)
+
+Bonus:
+
+Time - O(n log n)
+
+Space - O(1)
+
+  sol :function areThereDuplicates(...arr) {
+   let left  =0;
+   let right=arr.length-1;
+   if(arr.length===0) return false
+    
+    while(left<right){
+        if(arr[left]!==arr[right]){
+         right--
+        }else{
+            return true
+        }
+        if(right===left+1){
+            right=arr.length-1;
+            left++
+        }
+    }
+    return false
+}
+
+
