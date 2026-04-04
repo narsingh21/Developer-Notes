@@ -1,38 +1,66 @@
-** Restful routing with highly related or relational data can be quite quite chalanging thats why we use graphql.
- It solve over serving of data.(Heavely nested data)**
+# GraphQL Notes & Interview Questions
 
+> A comprehensive guide to GraphQL, including schema design, queries, mutations, and best practices.
 
-Q.Schema?
-- Schema is something which tells GraphQL that what kind of data we have in our data base and what is the 
-  relation between them.
+---
 
-   GraphQL.js is library which intract JS application to GraphQL
-   
-  Q. writing query or query type for schema in GraphQL.
+## 📚 Contents
 
-   const UserType = new GraphQLObjectType({
-    name:'User',
-    fields:{
-      id:{type:GrapQLString},
-      firstName:{type:GraphQLString}
-      age:{type:GraphQLInt}
-    }
-   })
+1. [Why GraphQL?](#why-graphql) - REST vs GraphQL
+2. [Schema](#schema) - Type definitions
+3. [RootQuery](#rootquery) - Entry points
+4. [Nested Query](#nested-query) - Relationships
+5. [Mutations](#mutations) - Data modification
 
-   Q.RootQuery?
-   A GraphQL root query is the entry point for querying your GraphQL schema
+---
 
-const  RootQuery = new GraphQLObjectType({
+## Why GraphQL?
+
+Restful routing with highly related or relational data can be quite challenging, that's why we use GraphQL.
+
+It solves over-serving of data (Heavily nested data).
+
+---
+
+## Schema
+
+Schema is something which tells GraphQL that what kind of data we have in our database and what is the relation between them.
+
+GraphQL.js is library which interacts JS application to GraphQL.
+
+---
+
+## Writing Query for Schema
+
+```javascript
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: {
+    id: { type: GraphQLString },
+    firstName: { type: GraphQLString },
+    age: { type: GraphQLInt },
+  },
+});
+```
+
+---
+
+## RootQuery
+
+A GraphQL root query is the entry point for querying your GraphQL schema.
+
+```javascript
+const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     user: {
       type: GraphQLList(UserType),
-      args:{id:{type:GraphQLString}}
+      args: { id: { type: GraphQLString } },
       resolve(parent, args) {
         // Fetch user from your data source
         return fetchUsers(); // Replace with your data fetching logic
       },
-    }
+    },
     users: {
       type: GraphQLList(UserType),
       resolve(parent, args) {
@@ -46,14 +74,18 @@ const  RootQuery = new GraphQLObjectType({
         // Fetch posts from your data source
         return fetchPosts(); // Replace with your data fetching logic
       },
-    },}
-  })
+    },
+  },
+});
+```
 
+---
 
+## Nested Query
 
+Nested query is all about relation of query or data with other query or data.
 
-nested query: it all about relation of query or data with other query or data
-
+```javascript
 const PostType = new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
@@ -69,10 +101,15 @@ const PostType = new GraphQLObjectType({
     },
   }),
 });
+```
 
-Q.
-Mutations in GraphQL are used to modify data (create, update, or delete). Below is an example of how to define and use mutations in a GraphQL schema.
+---
 
+## Mutations
+
+Mutations in GraphQL are used to modify data (create, update, or delete).
+
+```javascript
 // Mutation type
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -85,7 +122,11 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         // Replace this with your database logic
-        const newUser = { id: Date.now().toString(), name: args.name, email: args.email };
+        const newUser = {
+          id: Date.now().toString(),
+          name: args.name,
+          email: args.email,
+        };
         mockUsers.push(newUser);
         return newUser;
       },
@@ -99,11 +140,16 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         // Replace this with your database logic
-        const newPost = { id: Date.now().toString(), title: args.title, content: args.content, authorId: args.authorId };
+        const newPost = {
+          id: Date.now().toString(),
+          title: args.title,
+          content: args.content,
+          authorId: args.authorId,
+        };
         mockPosts.push(newPost);
         return newPost;
       },
     },
   },
 });
-
+```

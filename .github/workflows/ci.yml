@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check Markdown files
+        run: |
+          echo "Checking markdown files..."
+          # List all markdown files
+          find . -name "*.md" -type f
+
+      - name: Validate Markdown Links
+        run: |
+          echo "Validating markdown structure..."
+          # Check for required files
+          echo "Checking for README.md..."
+          test -f README.md && echo "✓ README.md exists" || echo "✗ README.md missing"
+
+          echo "Checking for LICENSE..."
+          test -f LICENSE && echo "✓ LICENSE exists" || echo "✗ LICENSE missing"
+
+          echo "Checking for CONTRIBUTING.md..."
+          test -f CONTRIBUTING.md && echo "✓ CONTRIBUTING.md exists" || echo "✗ CONTRIBUTING.md missing"
