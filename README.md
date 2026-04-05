@@ -3,7 +3,7 @@
 ## Purpose
 This project was created for my own learning as well as to help others. You can learn from this project and contribute to it. By successfully contributing and creating pull requests, you'll be on the right track and understand the true purpose of this open source project.
 
-A comprehensive collection of developer notes, interview questions, system design examples, and code snippets covering various topics in web development.
+>A comprehensive collection of developer notes, interview questions, system design examples, and code snippets covering various topics in web development.
 
 ## 📚 Contents
 
@@ -38,7 +38,7 @@ This repository contains notes and resources for:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/developer-notes.git
+   git clone https://github.com/narsingh21/developer-notes.git
    ```
 
 2. Browse the folders to explore different topics
