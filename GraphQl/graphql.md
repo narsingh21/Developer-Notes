@@ -16,6 +16,8 @@
 
 ## Why GraphQL?
 
+REST API's data is tightly cuples with each other. So If we sent data to client it tightly connected with each other so data will be in ove Fetch.
+
 Restful routing with highly related or relational data can be quite challenging, that's why we use GraphQL.
 
 It solves over-serving of data (Heavily nested data).
