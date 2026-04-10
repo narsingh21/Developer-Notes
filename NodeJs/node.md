@@ -52,9 +52,12 @@ Modules are logically encapsulated functional code, we can import and export the
 - Local modules
 - Third party modules
 
+
+
+
 ---
 
-## Quick Start
+## Create a server in Node.js
 
 ```javascript
 var http = require('http');
@@ -63,7 +66,7 @@ http
   .createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write('Application is running on server');
-    res.end('You are at server side');
+    res.end('This response comes from the server');
   })
   .listen(8080, () => {
     console.log('Server is running');
@@ -71,6 +74,8 @@ http
 ```
 
 ---
+
+Note:- difference between . and __dirname?
 
 ## REST API
 
