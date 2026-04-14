@@ -40,6 +40,7 @@ This repository is helpful for:
 - Developers preparing for **frontend or full-stack interviews**
 - Engineers who want **quick revision notes**
 - Developers learning **JavaScript, React, and Node.js**
+- Backend developers working with **Java, Python, Go, or Rust**
 - Anyone who wants to **learn in public and contribute**
 
 ---
@@ -51,6 +52,10 @@ This repository contains notes and resources for:
 - **React.js** — Component patterns, hooks, state management, and best practices
 - **Node.js** — Backend development concepts, APIs, and server-side JavaScript
 - **JavaScript** — Core language features, ES6+, and advanced concepts
+- **Java** — Spring framework, OOP patterns, and enterprise development
+- **Python** — Django, Flask, data science, and automation scripts
+- **Go** — Goroutines, channels, and microservices architecture
+- **Rust** — Memory safety, ownership model, and systems programming
 - **Data Structures & Algorithms** — Common patterns and problem-solving approaches
 - **Frontend System Design** — Architecture patterns, scalability considerations, and design examples (Netflix, Rate Limiter)
 - **GraphQL** — Query language fundamentals and implementation patterns
@@ -68,10 +73,14 @@ This repository contains notes and resources for:
 │   ├── netflix.drawio            # Netflix architecture diagram
 │   ├── netflix.png               # Visual representation
 │   └── rate-limiter/             # Rate limiter implementation
+├── Go/                           # Go language notes and examples
 ├── GraphQl/                      # GraphQL notes and examples
+├── Java/                         # Java and Spring framework notes
 ├── JavaScript/                   # JavaScript concepts and patterns
 ├── microservices/                # Microservices architecture notes
-└── NodeJs/                       # Node.js backend concepts
+├── NodeJs/                       # Node.js backend concepts
+├── Python/                       # Python and Django/Flask notes
+└── Rust/                         # Rust programming language notes
 ```
 
 ---
@@ -109,6 +118,10 @@ You can contribute by adding notes such as:
 
 - JavaScript closures explanation
 - React hooks deep dive
+- Spring Boot best practices (Java)
+- Django REST framework (Python)
+- Concurrent programming with Goroutines (Go)
+- Memory safety and ownership (Rust)
 - Git commands cheat sheet
 - Node.js performance tips
 - System design case studies

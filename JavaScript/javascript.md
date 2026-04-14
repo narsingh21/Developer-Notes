@@ -21,51 +21,11 @@
 
 These methods are used to control the `this` value of a function.
 
-- **call** and **apply** - Invoke the function with `this` value
-- **bind** - Returns a new function with `this` value bound
+- **`call`** - Invokes the function with `this` value and arguments passed individually
+- **`apply`** - Invokes the function with `this` value and arguments passed as an array
+- **`bind`** - Returns a new function with `this` value bound to a given context
 
-### Polyfill for call
-
-```javascript
-const myCall = function (context, ...args) {
-  context = context || globalThis;
-  const symbol = Symbol();
-
-  context[symbol] = this;
-  const result = context[symbol](...args);
-  delete context[symbol];
-  return result;
-};
-
-Function.prototype.myCall = myCall;
-```
-
-### Polyfill for apply
-
-```javascript
-Function.prototype.myApply = function (context, argsArray) {
-  context = context || globalThis;
-
-  const fnSymbol = Symbol();
-  context[fnSymbol] = this;
-
-  const result = argsArray
-    ? context[fnSymbol](...argsArray)
-    : context[fnSymbol]();
-
-  delete context[fnSymbol];
-  return result;
-};
-```
-
-### Polyfill for bind
-
-```javascript
-Function.prototype.myBind = function (context, ...args) {
-  const fn = this;
-  return fn;
-};
-```
+> **Polyfills:** Custom polyfill implementations have been moved to [Frontend-Questions/custom-js-functions/polyfills-apply-call-bind.md](../../Frontend-Questions/custom-js-functions/polyfills-apply-call-bind.md)
 
 ---
 
