@@ -13,14 +13,24 @@
 5. [Mutations](#mutations) - Data modification
 
 ---
+section 1 Introduction
+
+## What is GraphQl?
+GraphQL is a query language for your API. Instead of many fixed endpoints, you have one endpoint and you ask for exactly the data you need.
+
+One endpoint
+Everything goes through POST /graphql. No more /users, /posts, /comments.
 
 ## Why GraphQL?
 
-REST API's data is tightly cuples with each other. So If we sent data to client it tightly connected with each other so data will be in ove Fetch.
+REST API's data is tightly cuples with each other. So If we sent data to client it tightly connected with each other so data will be in over Fetch.
 
 Restful routing with highly related or relational data can be quite challenging, that's why we use GraphQL.
 
 It solves over-serving of data (Heavily nested data).
+
+
+scetion 2 schema and types 
 
 ---
 

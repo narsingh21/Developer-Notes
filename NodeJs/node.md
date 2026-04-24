@@ -77,6 +77,37 @@ http
 
 Note:- difference between . and __dirname?
 
+------------------------------------------------------------------
+section -3 Web works
+
+- When we type a url in browser with protocal+hostname+domain. It will goes into the DNS system it get an ip address. https://google.com to https://127.001.001.456.com:443.
+443 and 80 are default port for https and http.
+
+-via internet it find the server and make a TCP/ip connection.
+- client then sent the http request(get put post etc) to server and server respond with http response.
+
+-TCP devides the request response into the chunks each chunck contain the header. It travel with ip.
+
+
+----------------------------------------------------------------------
+## section How Node works
+
+-Nodejs is made of v8 engine and libuv. They are written in js and as well as c++. eventloop and thread pool are available becuase of libuv.
+
+-Task like are file system, cyrptography, file comprassion, DNS lookup, are handled by the Tread pool. These task have heavy lifting.
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------
+
 ## REST API
 
 ### What is API?
